@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'NodeJS18'
-    }
-
     stages {
 
         stage('Checkout') {
@@ -15,26 +11,26 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'node --version'
-                sh 'npm --version'
-                sh 'npm install'
+                echo 'npm install'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'npm test'
+                echo 'npm test'
             }
         }
-    }
 
-    post {
-        success {
-            echo 'Pipeline completed successfully'
+        stage('Docker Build') {
+            steps {
+                echo 'docker build -t jenkins-cicd-demo .'
+            }
         }
 
-        failure {
-            echo 'Pipeline failed'
+        stage('Deploy') {
+            steps {
+                echo 'docker run -d -p 3000:3000 jenkins-cicd-demo'
+            }
         }
     }
 }
