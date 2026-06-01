@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'NodeJS18'
-    }
-
     stages {
 
         stage('Checkout') {
@@ -15,13 +11,7 @@ pipeline {
 
         stage('Build') {
             steps {
-<<<<<<< HEAD
                 echo 'npm install'
-=======
-                sh 'node --version'
-                sh 'npm --version'
-                sh 'npm install'
->>>>>>> d0b625a (Added NodeJS tool configuration)
             }
         }
 
@@ -30,7 +20,6 @@ pipeline {
                 echo 'npm test'
             }
         }
-<<<<<<< HEAD
 
         stage('Docker Build') {
             steps {
@@ -43,7 +32,5 @@ pipeline {
                 echo 'docker run -d -p 3000:3000 jenkins-cicd-demo'
             }
         }
-=======
->>>>>>> d0b625a (Added NodeJS tool configuration)
     }
 }
